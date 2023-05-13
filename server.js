@@ -24,7 +24,7 @@ const app = express();
 app.use(cors());
 app.options('*', cors());
 app.use(compression());
-app.use(express.json()); //set JSON
+app.use(express.json({limit:"10kb"})); //set JSON and limit request
 app.use(express.urlencoded({ extended: false })); //make send data from form
 app.use(express.static(path.join(__dirname, "uploads"))); // make uploads folder as public
 
