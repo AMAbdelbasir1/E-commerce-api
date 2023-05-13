@@ -1,0 +1,620 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "E-commerce API",
+    "description": "API for managing E-commerce data"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": ["http"],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ],
+  "paths": {
+    "/api/v1/categories": {
+      "get": {
+        "tags": ["categories"],
+        "summary": "Get all categories",
+        "responses": {
+          "200": {
+            "description": "Returns a list of categories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Category"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["categories"],
+        "summary": "Create a new category",
+        "parameters": [
+          {
+            "name": "categories",
+            "in": "body",
+            "description": "category object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CategoryInput"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the created category",
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/categories/{id}": {
+      "get": {
+        "tags": ["categories"],
+        "summary": "Get a category by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "category ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the requested category",
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          },
+          "404": {
+            "description": "category not found"
+          }
+        }
+      },
+      "put": {
+        "tags": ["categories"],
+        "summary": "Update a category by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "category ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "category",
+            "in": "body",
+            "description": "category object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CategoryInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated category",
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          },
+          "404": {
+            "description": "category not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["categories"],
+        "summary": "Delete a category by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "category ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "category deleted"
+          },
+          "404": {
+            "description": "category not found"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/signup": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Create a new user",
+        "parameters": [
+          {
+            "name": "signup",
+            "in": "body",
+            "description": "signup object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SignUpInput"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the created category",
+            "schema": {
+              "$ref": "#/definitions/signup"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Login user",
+        "parameters": [
+          {
+            "name": "login",
+            "in": "body",
+            "description": "login object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/loginInput"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the created category",
+            "schema": {
+              "$ref": "#/definitions/login"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/getMe": {
+      "get": {
+        "tags": ["Auth"],
+        "summary": "get user's login",
+        "responses": {
+          "200": {
+            "description": "Returns the user's information"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/forgotPassword": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "forgot Password user ",
+        "parameters": [
+          {
+            "name": "forgotPassword",
+            "in": "body",
+            "description": "forgot Password object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/forgotPasswordInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the succsses send code to email",
+            "schema": {
+              "$ref": "#/definitions/forgotPassword"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/verifyResetCode": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "verify Reset Code",
+        "parameters": [
+          {
+            "name": "verifyResetCode",
+            "in": "body",
+            "description": "verify Reset Code that send to user at email",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/verifyResetCodeInput"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the created category",
+            "schema": {
+              "$ref": "#/definitions/verifyResetCode"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/resetPassword": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "reset Password user ",
+        "parameters": [
+          {
+            "name": "resetPassword",
+            "in": "body",
+            "description": "reset Password object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/resetPasswordInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the succsses reset Password",
+            "schema": {
+              "$ref": "#/definitions/resetPassword"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/subcategories": {
+      "get": {
+        "tags": ["subcategories"],
+        "summary": "Get all subcategories",
+        "responses": {
+          "200": {
+            "description": "Returns a list of subcategories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/subcategory"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["subcategories"],
+        "summary": "Create a new subcategory",
+        "parameters": [
+          {
+            "name": "subcategory",
+            "in": "body",
+            "description": "category object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/subcategoryInput"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the created category",
+            "schema": {
+              "$ref": "#/definitions/subcategory"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/categories/{categoryId}/subcategories": {
+      "get": {
+        "tags": ["subcategories"],
+        "summary": "Get all subcategories belong to category",
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "description": "category ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of subcategories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/subcategory"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/subcategories/{id}": {
+      "get": {
+        "tags": ["subcategories"],
+        "summary": "Get a subcategory by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "subcategory ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the requested category",
+            "schema": {
+              "$ref": "#/definitions/subcategory"
+            }
+          },
+          "404": {
+            "description": "subcategory not found"
+          }
+        }
+      },
+      "put": {
+        "tags": ["subcategories"],
+        "summary": "Update a subcategory by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "subcategory ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subcategory",
+            "in": "body",
+            "description": "subcategory object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/subcategoryInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated category",
+            "schema": {
+              "$ref": "#/definitions/subcategory"
+            }
+          },
+          "404": {
+            "description": "category not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["subcategories"],
+        "summary": "Delete a subcategory by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "subcategory ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "subcategory deleted"
+          },
+          "404": {
+            "description": "category not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CategoryInput": {
+      "type": "object",
+      "required": ["name", "image"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "category's name"
+        },
+        "image": {
+          "type": "string",
+          "description": "URL of category's Category image"
+        }
+      }
+    },
+    "Category": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CategoryInput"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "category's unique ID"
+            }
+          }
+        }
+      ]
+    },
+    "subcategoryInput": {
+      "type": "object",
+      "required": ["name", "categoryId"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "subcategory's name"
+        },
+        "categoryId": {
+          "type": "string",
+          "description": "category's Id"
+        }
+      }
+    },
+    "subcategory": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/subcategoryInput"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "category's unique ID"
+            }
+          }
+        }
+      ]
+    },
+    "SignUpInput": {
+      "type": "object",
+      "required": ["name", "email", "password", "passwordConfirm"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "User's name"
+        },
+        "email": {
+          "type": "string",
+          "description": "User's email"
+        },
+        "password": {
+          "type": "string",
+          "description": "User's password"
+        },
+        "passwordConfirm": {
+          "type": "string",
+          "description": "confirm User's password"
+        }
+      }
+    },
+    "signup": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignUpInput"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "User's unique ID"
+            }
+          }
+        }
+      ]
+    },
+    "loginInput": {
+      "type": "object",
+      "required": ["email", "password"],
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "User's email"
+        },
+        "password": {
+          "type": "string",
+          "description": "User's password"
+        }
+      }
+    },
+    "login": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/loginInput"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "User's unique ID"
+            }
+          }
+        }
+      ]
+    },
+    "forgotPasswordInput": {
+      "type": "object",
+      "required": ["email"],
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "User's email"
+        }
+      }
+    },
+    "forgotPassword": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Reset code sent to email"
+        }
+      }
+    },
+    "verifyResetCodeInput": {
+      "type": "object",
+      "required": ["resetCode"],
+      "properties": {
+        "resetCode": {
+          "type": "integer",
+          "example": 345577,
+          "description": "User's resetCode"
+        }
+      }
+    },
+    "verifyResetCode": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "status": "Success",
+          "description": "resetCode"
+        }
+      }
+    },
+    "resetPasswordInput": {
+      "type": "object",
+      "required": ["email", "newPassword"],
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "User's email"
+        },
+        "newPassword": {
+          "type": "string",
+          "description": "new User's password"
+        }
+      }
+    },
+    "resetPassword": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "User's unique token"
+        }
+      }
+    }
+  }
+}

@@ -39,9 +39,14 @@ exports.login = asyncHandler(async (req, res, next) => {
   const token = createToken(user._id);
 
   // Delete password from response
-  delete user._doc.password;
+  //delete user._doc.password;
   // 4) send response to client side
-  res.status(200).json({ data: user, token });
+  res
+    .status(200)
+    .json({
+      data: { _id: user._id, name: user.name, email: user.email },
+      token,
+    });
 });
 
 // @desc   make sure the user is logged in

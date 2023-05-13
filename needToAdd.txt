@@ -1,1 +1,2 @@
 1=> get specific address
+2=>reduce return data

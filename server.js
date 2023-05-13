@@ -1,10 +1,23 @@
 const path = require("path");
-//logging request
+
 const express = require("express");
+//logging request
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const cors = require("cors");
-const compression = require('compression');
+const compression = require("compression");
+//security import
+
+const rateLimit = require("express-rate-limit");
+const hpp = require("hpp");
+const mongoSanitize = require("express-mongo-sanitize");
+const xss = require("xss-clean");
+
+//Documntaion swagger-UI
+
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.json");
+
 // error require
 const ApiError = require("./utils/apiError");
 const globalError = require("./middlewares/errorMiddleware");
@@ -19,14 +32,45 @@ dbConnection();
 
 //setting app
 
-const app = express();
+const app = express(); //build app
 
 app.use(cors());
-app.options('*', cors());
-app.use(compression());
-app.use(express.json({limit:"10kb"})); //set JSON and limit request
+app.options("*", cors());
+
+app.use(compression()); //reduce size of data return
+
+app.use(express.json({ limit: "10kb" })); //'set JSON and limit request
+
 app.use(express.urlencoded({ extended: false })); //make send data from form
 app.use(express.static(path.join(__dirname, "uploads"))); // make uploads folder as public
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument)); //document
+
+//Security best parctice
+app.use(mongoSanitize());
+app.use(xss());
+app.use(
+  hpp({
+    whitelist: [
+      "price",
+      "sold",
+      "ratingsQuantity",
+      "ratingsAverage",
+      "quantity",
+      "images",
+    ],
+  }),
+); //middleware to protect against HTTP Parameter Pollution attacks
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100,
+  message:
+    "Too many accounts created from this IP, please try again after an 15 minutes",
+});
+
+// Apply the rate limiting middleware to all requests
+app.use("/api", limiter);
 
 /************************** */
 
