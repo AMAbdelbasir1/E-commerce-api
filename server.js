@@ -57,7 +57,6 @@ app.use(
       "ratingsQuantity",
       "ratingsAverage",
       "quantity",
-      "images",
     ],
   }),
 ); //middleware to protect against HTTP Parameter Pollution attacks

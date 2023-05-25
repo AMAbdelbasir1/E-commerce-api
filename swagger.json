@@ -422,6 +422,741 @@
           }
         }
       }
+    },
+    "/api/v1/brands": {
+      "get": {
+        "tags": ["Brands"],
+        "summary": "Get all Brands",
+        "responses": {
+          "200": {
+            "description": "Returns a list of Brands",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Brand"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Brands"],
+        "summary": "Create a new Brand",
+        "parameters": [
+          {
+            "name": "Brands",
+            "in": "body",
+            "description": "category object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BrandInput"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the created Brand",
+            "schema": {
+              "$ref": "#/definitions/Brand"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/brands/{id}": {
+      "get": {
+        "tags": ["Brands"],
+        "summary": "Get a Brand by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Brand's ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the requested Brand",
+            "schema": {
+              "$ref": "#/definitions/Brand"
+            }
+          },
+          "404": {
+            "description": "Brand not found"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Brands"],
+        "summary": "Update a Brand by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Brand's ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Brand",
+            "in": "body",
+            "description": "Brand object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BrandInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated Brand",
+            "schema": {
+              "$ref": "#/definitions/Brand"
+            }
+          },
+          "404": {
+            "description": "Brand not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Brands"],
+        "summary": "Delete a Brand by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Brand's ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Brand deleted"
+          },
+          "404": {
+            "description": "Brand not found"
+          }
+        }
+      }
+    },
+    "/api/v1/products": {
+      "get": {
+        "tags": ["products"],
+        "summary": "Get all products",
+        "responses": {
+          "200": {
+            "description": "Returns a list of products",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/product"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["products"],
+        "summary": "Create a new product",
+        "parameters": [
+          {
+            "name": "product",
+            "in": "body",
+            "description": "product object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/productInput"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the created product",
+            "schema": {
+              "$ref": "#/definitions/product"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/products/{id}": {
+      "get": {
+        "tags": ["products"],
+        "summary": "Get a product by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "product's ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the requested product",
+            "schema": {
+              "$ref": "#/definitions/product"
+            }
+          },
+          "404": {
+            "description": "product not found"
+          }
+        }
+      },
+      "put": {
+        "tags": ["products"],
+        "summary": "Update a product by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "product's ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "product",
+            "in": "body",
+            "description": "product object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/productInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated product",
+            "schema": {
+              "$ref": "#/definitions/product"
+            }
+          },
+          "404": {
+            "description": "product not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["products"],
+        "summary": "Delete a product by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "product's ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "product deleted"
+          },
+          "404": {
+            "description": "product not found"
+          }
+        }
+      }
+    },
+    "/api/v1/products/{productId}/reviews": {
+      "get": {
+        "tags": ["reviews"],
+        "summary": "Get all reviews",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "product's ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of reviews",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Review"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["reviews"],
+        "summary": "Create a new review",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "product's ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reviews",
+            "in": "body",
+            "description": "review object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReviewInput"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the created product",
+            "schema": {
+              "$ref": "#/definitions/Review"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/products/{productId}/reviews/{id}": {
+      "get": {
+        "tags": ["reviews"],
+        "summary": "Get a review by ID",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "product's ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "review's ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the requested review",
+            "schema": {
+              "$ref": "#/definitions/Review"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["reviews"],
+        "summary": "Update a review by ID",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "product's ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "review's ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reviews",
+            "in": "body",
+            "description": "review object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReviewInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated review",
+            "schema": {
+              "$ref": "#/definitions/Review"
+            }
+          },
+          "404": {
+            "description": "review not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["reviews"],
+        "summary": "Delete a review by ID",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "product's ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "review's ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "review deleted"
+          },
+          "404": {
+            "description": "review not found"
+          }
+        }
+      }
+    },
+    "/api/v1/coupons": {
+      "get": {
+        "tags": ["coupons"],
+        "summary": "Get all coupons",
+        "responses": {
+          "200": {
+            "description": "Returns a list of coupons",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/coupon"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["coupons"],
+        "summary": "Create a new coupon",
+        "parameters": [
+          {
+            "name": "coupon",
+            "in": "body",
+            "description": "coupon object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/couponInput"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the created coupons",
+            "schema": {
+              "$ref": "#/definitions/coupon"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/coupons/{id}": {
+      "get": {
+        "tags": ["coupons"],
+        "summary": "Get a coupon by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "coupon's ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the requested coupons",
+            "schema": {
+              "$ref": "#/definitions/coupon"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["coupons"],
+        "summary": "Update a coupon by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "coupon's ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "coupon",
+            "in": "body",
+            "description": "coupon object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/couponInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated coupon",
+            "schema": {
+              "$ref": "#/definitions/coupon"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["coupons"],
+        "summary": "Delete a coupon by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "coupon's ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "coupon deleted"
+          }
+        }
+      }
+    },
+    "/api/v1/addresses": {
+      "get": {
+        "tags": ["addresses"],
+        "summary": "Get all addresses",
+        "responses": {
+          "200": {
+            "description": "Returns a list of addresses",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/address"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["addresses"],
+        "summary": "Create a new address",
+        "parameters": [
+          {
+            "name": "address",
+            "in": "body",
+            "description": "address object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/addressInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the created coupons",
+            "schema": {
+              "$ref": "#/definitions/address"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/addresses/{id}": {
+      "delete": {
+        "tags": ["addresses"],
+        "summary": "Delete a address by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "address's ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {}
+        }
+      }
+    },"/api/v1/wishlist": {
+      "get": {
+        "tags": ["wishlist"],
+        "summary": "Get my wishlist",
+        "responses": {
+          "200": {
+            "description": "Returns a object of my wishlist",
+            "schema": {
+                "$ref": "#/definitions/wishlist"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["wishlist"],
+        "summary": "add product to my wishlist",
+        "parameters": [
+          {
+            "name": "wishlist",
+            "in": "body",
+            "description": "wishlist object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/wishlistInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product added successfully to your wishlist.",
+            "schema": {
+              "$ref": "#/definitions/wishlist"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/wishlist/{productId}": {
+      "delete": {
+        "tags": ["wishlist"],
+        "summary": "Delete a address by ID",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "product's ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {}
+        }
+      }
+    },
+    "/api/v1/cart": {
+      "get": {
+        "tags": ["cart"],
+        "summary": "Get my cart",
+        "responses": {
+          "200": {
+            "description": "Returns a object of my cart",
+            "schema": {
+                "$ref": "#/definitions/cart"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["cart"],
+        "summary": "add product to my cart",
+        "parameters": [
+          {
+            "name": "cart",
+            "in": "body",
+            "description": "cart object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/cartInput"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Product added successfully to your cart.",
+            "schema": {
+              "$ref": "#/definitions/cart"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["cart"],
+        "summary": "clear cart",
+        "responses": {
+          "204": {
+            "description": "cart deleted"
+          }
+        }
+      }
+    },
+    "/api/v1/cart/{itemId}": {
+      "put": {
+        "tags": ["cart"],
+        "summary": "Update item's quantity at my cart by ID",
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "description": "item's ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cart",
+            "in": "body",
+            "description": "coupon object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/quantity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated item",
+            "schema": {
+              "$ref": "#/definitions/cart"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["cart"],
+        "summary": "Delete a item by ID",
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "description": "coupon's ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "coupon deleted"
+          }
+        }
+      }
+    },
+    "/api/v1/cart/applyCoupon": {
+      "put": {
+        "tags": ["cart"],
+        "summary": "applyCoupon",
+        "parameters": [
+          {
+            "name": "coupon",
+            "in": "body",
+            "description": "coupon object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/couponName"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "coupon deleted"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -613,6 +1348,311 @@
         "token": {
           "type": "string",
           "description": "User's unique token"
+        }
+      }
+    },
+    "BrandInput": {
+      "type": "object",
+      "required": ["name", "image"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "category's name"
+        },
+        "image": {
+          "type": "string",
+          "description": "URL of category's Category image"
+        }
+      }
+    },
+    "Brand": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CategoryInput"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "category's unique ID"
+            }
+          }
+        }
+      ]
+    },
+    "productInput": {
+      "type": "object",
+      "required": [
+        "title",
+        "description",
+        "quantity",
+        "sold",
+        "price",
+        "category",
+        "color",
+        "imageCover",
+        "images"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "samsung A13",
+          "description": "product's name"
+        },
+        "description": {
+          "type": "string",
+          "example": "Black 64GB 4G Ram",
+          "description": "product's description"
+        },
+        "quantity": {
+          "type": "integer",
+          "example": 5,
+          "description": "product's quantity"
+        },
+        "sold": {
+          "type": "integer",
+          "example": 3,
+          "description": "product's sold"
+        },
+        "price": {
+          "type": "integer",
+          "example": 5600,
+          "description": "product's price"
+        },
+        "category": {
+          "type": "string",
+          "example": "644585b46236e1670b2ce6c3",
+          "description": "product's description"
+        },
+        "colors": {
+          "type": "string",
+          "example": "Black",
+          "description": "product's description"
+        },
+        "subcategories": {
+          "type": "array",
+          "example": ["644585b46236e1670b2ce6c3", "644585b46236e1670b2ce6c3"],
+          "description": "product's imageCover"
+        },
+        "imageCover": {
+          "type": "string",
+          "example": "https://e-commerce-api-5jnt.onrender.com/products/https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
+          "description": "product's imageCover"
+        },
+        "images": {
+          "type": "array",
+          "example": [
+            "https://e-commerce-api-5jnt.onrender.com/products/https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg"
+          ],
+          "description": "URL of product's image"
+        }
+      }
+    },
+    "product": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/productInput"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "category's unique ID"
+            }
+          }
+        }
+      ]
+    },
+    "ReviewInput": {
+      "type": "object",
+      "required": ["title", "ratings"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "samsung A13",
+          "description": "product's name"
+        },
+        "ratings": {
+          "type": "integer",
+          "example": 3,
+          "description": "product's sold"
+        }
+      }
+    },
+    "Review": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReviewInput"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "description": "document's unique ID"
+            }
+          }
+        }
+      ]
+    },
+    "couponInput": {
+      "type": "object",
+      "required": ["name", "expire", "discount"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Happy day",
+          "description": "coupons's name"
+        },
+        "expire": {
+          "type": "string",
+          "example": "dd/mm/yyyy",
+          "description": "coupons's expire"
+        },
+        "discount": {
+          "type": "integer",
+          "example": 20,
+          "description": "coupons's discount"
+        }
+      }
+    },
+    "coupon": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/couponInput"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "description": "document's unique ID"
+            }
+          }
+        }
+      ]
+    },
+    "addressInput": {
+      "type": "object",
+      "required": ["alias", "details","city", "phone"],
+      "properties": {
+        "alias": {
+          "type": "string",
+          "example": "Garden City - Cairo - Egypt",
+          "description": "coupons's name"
+        },
+        "details": {
+          "type": "string",
+          "example": "20, Aisha Eltaymourea St.,12th Floor - Garden City - Cairo - Egypt",
+          "description": "coupons's expire"
+        },
+        "city": {
+          "type": "string",
+          "example": "cairo",
+          "description": "coupons's expire"
+        },
+        "phone": {
+          "type": "string",
+          "example": "01234567890",
+          "description": "coupons's expire"
+        }
+      }
+    },
+    "address": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/addressInput"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "description": "document's unique ID"
+            }
+          }
+        }
+      ]
+    },
+    "wishlistInput": {
+      "type": "object",
+      "required": ["productId"],
+      "properties": {
+        "productId": {
+          "type": "string",
+          "example": "645617c543f83fdcdd638440",
+          "description": "product's ID"
+        }
+      }
+    },
+    "wishlist": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/wishlistInput"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "description": "document's unique ID"
+            }
+          }
+        }
+      ]
+    },
+    "cartInput": {
+      "type": "object",
+      "required": ["productId","color"],
+      "properties": {
+        "productId": {
+          "type": "string",
+          "example": "645617c543f83fdcdd638440",
+          "description": "product's ID"
+        }, "color": {
+          "type": "string",
+          "example": "red",
+          "description": "product's color"
+        }
+      }
+    },
+    "cart": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/cartInput"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "description": "document's unique ID"
+            }
+          }
+        }
+      ]
+    },
+    "couponName": {
+      "type": "object",
+      "required": ["productId"],
+      "properties": {
+        "productId": {
+          "type": "string",
+          "example": "Happy day",
+          "description": "coupons's name"
+        }
+      }
+    },
+    "quantity": {
+      "type": "object",
+      "required": ["quantity"],
+      "properties": {
+        "quantity": {
+          "type": "integer",
+          "example": 4,
+          "description": "quantity's number"
         }
       }
     }
