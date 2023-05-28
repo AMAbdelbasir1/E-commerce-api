@@ -2,7 +2,7 @@
 
 ## to install npm modules
 
-npm i or npm install
+npm i OR npm install
 
 ## to run
 
