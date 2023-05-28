@@ -1,6 +1,9 @@
 # E-commerce-api
-## to run 
+
+## to install npm modules
+
 npm i
 
+## to run
 
 npm run dev
