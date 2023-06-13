@@ -5,9 +5,9 @@
     "title": "E-commerce API",
     "description": "API for managing E-commerce data"
   },
-  "host": "localhost:3000",
+  "host": "e-commerce-api-5jnt.onrender.com",
   "basePath": "/",
-  "schemes": ["http"],
+  "schemes": ["https"],
   "securityDefinitions": {
     "Bearer": {
       "type": "apiKey",
