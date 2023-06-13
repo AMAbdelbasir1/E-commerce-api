@@ -47,8 +47,8 @@ app.use(express.static(path.join(__dirname, "uploads"))); // make uploads folder
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument)); //document
 
 //Security best parctice
-app.use(mongoSanitize());
-app.use(xss());
+app.use(mongoSanitize()); //prevent mongo injection
+app.use(xss()); //prevent add html or script to data when send
 app.use(
   hpp({
     whitelist: [
