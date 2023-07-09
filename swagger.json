@@ -40,6 +40,9 @@
       "post": {
         "tags": ["categories"],
         "summary": "Create a new category",
+         "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "name": "categories",
@@ -49,6 +52,13 @@
             "schema": {
               "$ref": "#/definitions/CategoryInput"
             }
+          }
+          , {
+            "name": "image",
+            "in": "formData",
+            "description": "User image file",
+            "required": true,
+            "type": "file"
           }
         ],
         "responses": {
@@ -89,6 +99,9 @@
       "put": {
         "tags": ["categories"],
         "summary": "Update a category by ID",
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -105,6 +118,12 @@
             "schema": {
               "$ref": "#/definitions/CategoryInput"
             }
+          }, {
+            "name": "image",
+            "in": "formData",
+            "description": "category's image",
+            "required": false,
+            "type": "file"
           }
         ],
         "responses": {
@@ -442,6 +461,9 @@
       "post": {
         "tags": ["Brands"],
         "summary": "Create a new Brand",
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "name": "Brands",
@@ -451,6 +473,13 @@
             "schema": {
               "$ref": "#/definitions/BrandInput"
             }
+          },
+          {
+            "name": "image",
+            "in": "formData",
+            "description": "Brand image file and is just one image",
+            "required": true,
+            "type": "file"
           }
         ],
         "responses": {
@@ -491,6 +520,9 @@
       "put": {
         "tags": ["Brands"],
         "summary": "Update a Brand by ID",
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -507,6 +539,13 @@
             "schema": {
               "$ref": "#/definitions/BrandInput"
             }
+          },
+          {
+            "name": "image",
+            "in": "formData",
+            "description": "Brand image file and is just one image",
+            "required": false,
+            "type": "file"
           }
         ],
         "responses": {
@@ -562,6 +601,9 @@
       "post": {
         "tags": ["products"],
         "summary": "Create a new product",
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "name": "product",
@@ -571,6 +613,18 @@
             "schema": {
               "$ref": "#/definitions/productInput"
             }
+          }, {
+            "name": "imageCover",
+            "in": "formData",
+            "description": "product image caver",
+            "required": true,
+            "type": "file"
+          }, {
+            "name": "images",
+            "in": "formData",
+            "description": "product images",
+            "required": true,
+            "type": "file"
           }
         ],
         "responses": {
@@ -627,6 +681,19 @@
             "schema": {
               "$ref": "#/definitions/productInput"
             }
+          }, 
+          {
+            "name": "imageCover",
+            "in": "formData",
+            "description": "product image caver",
+            "required": false,
+            "type": "file"
+          }, {
+            "name": "images",
+            "in": "formData",
+            "description": "product images must be less than or equal 5",
+            "required": false,
+            "type": "file"
           }
         ],
         "responses": {
@@ -1169,7 +1236,7 @@
           "description": "category's name"
         },
         "image": {
-          "type": "string",
+          "type": "file",
           "description": "URL of category's Category image"
         }
       }
@@ -1357,10 +1424,10 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "category's name"
+          "description": "Brand's name"
         },
         "image": {
-          "type": "string",
+          "type": "file",
           "description": "URL of category's Category image"
         }
       }
@@ -1375,7 +1442,7 @@
           "properties": {
             "id": {
               "type": "string",
-              "description": "category's unique ID"
+              "description": "Brand's unique ID"
             }
           }
         }
@@ -1436,15 +1503,11 @@
           "description": "product's imageCover"
         },
         "imageCover": {
-          "type": "string",
-          "example": "https://e-commerce-api-5jnt.onrender.com/products/https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
+          "type": "file",
           "description": "product's imageCover"
         },
         "images": {
-          "type": "array",
-          "example": [
-            "https://e-commerce-api-5jnt.onrender.com/products/https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg"
-          ],
+          "type": "file",
           "description": "URL of product's image"
         }
       }
