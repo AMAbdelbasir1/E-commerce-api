@@ -82,8 +82,14 @@ if (process.env.NODE_ENV === "development") {
 //  Router section=>
 
 const mountRoutes = require("./routers");
+const { webhookCheckout } = require("./services/orderService");
 
 mountRoutes(app);
+app.post(
+  '/webhook-checkout',
+  express.raw({ type: 'application/json' }),
+  webhookCheckout
+);
 
 //handling global error <=
 
