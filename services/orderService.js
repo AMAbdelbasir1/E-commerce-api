@@ -148,15 +148,14 @@ exports.checkoutSession = asyncHandler(async (req, res, next) => {
           unit_amount: totalOrderPrice * 100,
           product_data: {
             name: req.user.name,
-           
           },
         },
         quantity: 1,
       },
     ],
     mode: "payment",
-    success_url: `${req.protocol}://${req.get("host")}/orders`,
-    cancel_url: `${req.protocol}://${req.get("host")}/cart`,
+    success_url: `${req.protocol}://${req.get("host")}/api/v1/orders`,
+    cancel_url: `${req.protocol}://${req.get("host")}/api/v1/cart`,
     customer_email: req.user.email,
     client_reference_id: req.params.cartId,
     metadata: req.body.shippingAddress,
@@ -207,7 +206,11 @@ exports.webhookCheckout = asyncHandler(async (req, res, next) => {
   const sig = req.headers["stripe-signature"];
 
   let event;
-
+  console.log(req.body);
+  console.log("-------------------------------");
+  console.log(sig);
+  console.log("-------------------------------");
+  console.log(process.env.STRIPE_WEBHOOK_SECRET);
   try {
     event = stripe.webhooks.constructEvent(
       req.body,
