@@ -17,6 +17,7 @@ const xss = require("xss-clean");
 
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
+const { webhookCheckout } = require("./services/orderService");
 
 // error require
 const ApiError = require("./utils/apiError");
@@ -38,7 +39,11 @@ app.use(cors());
 app.options("*", cors());
 
 app.use(compression()); //reduce size of data return
-
+app.post(
+  '/webhook-checkout',
+  express.raw({ type: 'application/json' }),
+  webhookCheckout
+);
 app.use(express.json({ limit: "10kb" })); //'set JSON and limit request
 
 app.use(express.urlencoded({ extended: false })); //make send data from form
@@ -82,14 +87,9 @@ if (process.env.NODE_ENV === "development") {
 //  Router section=>
 
 const mountRoutes = require("./routers");
-const { webhookCheckout } = require("./services/orderService");
 
 mountRoutes(app);
-app.post(
-  '/webhook-checkout',
-  express.raw({ type: 'application/json' }),
-  webhookCheckout
-);
+
 
 //handling global error <=
 
