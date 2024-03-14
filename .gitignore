@@ -1,2 +1,9 @@
-node_modules
+/node_modules
+
+package-lock.json
+
 config.env
+
+udemy-ecommerce-api-v1.postman_collection.json
+
+sndEmail.txt
